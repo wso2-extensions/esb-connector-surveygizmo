@@ -57,26 +57,26 @@
                 payload = mc.getPayloadJSON();
                 
                 if (language != null && language!= ""){
-                	payload.language = language;
+                    payload.language = language;
                 }
                 
                 if (status != null && status!= ""){
-                	payload.status = status;
+                    payload.status = status;
                 }
                
                 if (slug != null && slug!= ""){
-                	payload.slug = slug;
+                    payload.slug = slug;
                 }
                 
                 if (subType != null && subType != ""){
-                	payload.subtype = subType;
+                    payload.subtype = subType;
                 }
                 
                 if (tokenVariables != null && tokenVariables != ""){
-                	payload.tokenvariables = tokenVariables;
+                    payload.tokenvariables = tokenVariables;
                 }
                
-               	mc.setPayloadJSON(payload);
+                mc.setPayloadJSON(payload);
           ]]>
         </script>
         <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2"/>

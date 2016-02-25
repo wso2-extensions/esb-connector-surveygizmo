@@ -33,15 +33,15 @@
                 var urlQuery = '';
                 
                 if (page != null && page != ""){
-					urlQuery += '&page=' + page ;
+                    urlQuery += '&page=' + page ;
                 }
                 
                 if (resultsPerPage != null && resultsPerPage != ""){
-					urlQuery += '&resultsperpage=' + resultsPerPage ;
+                    urlQuery += '&resultsperpage=' + resultsPerPage ;
                 }
                
                 if (urlQuery != "") {
-					mc.setProperty('uri.var.urlQuery', urlQuery);    
+                    mc.setProperty('uri.var.urlQuery', urlQuery);
                 }
             ]]>
         </script>

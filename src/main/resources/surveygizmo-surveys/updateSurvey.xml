@@ -45,60 +45,60 @@
         <property name="uri.var.pollType" expression="$func:pollType"/>
         <script language="js">
             <![CDATA[
-		  				
-		  		    var title = mc.getProperty("uri.var.title");
-		  		    var copy = mc.getProperty("uri.var.copy");
-	  				var theme = mc.getProperty("uri.var.theme");		  				
-	  				var status = mc.getProperty("uri.var.status");
-	  				var team = mc.getProperty("uri.var.team");
-	  				var options = mc.getProperty("uri.var.options");
-	  				var blockBy = mc.getProperty("uri.var.blockBy");
-	  				var pollOptions = ''+mc.getProperty("uri.var.pollOptions");
-	  				var pollType = mc.getProperty("uri.var.pollType");
 
-	  				var	payload = {};
-	  				
-	  				if (title != null && title != ""){
-	  					payload ["title"] = title;
-	  				}
-	  				if (copy != null && copy != ""){
-	  					payload ["copy"] = copy;
-	  				}
-	  				
-	  				if (status != null && status != ""){
-	  					payload ["status"] = status;
-	  				}
-	  				if (theme != null && theme != ""){
-	  					payload ["theme"] = theme;
-	  				}
-	  				if (team != null && team != ""){
-	  					payload ["team"] = team;
-	  				}
-	  				if (options != null && options != ""){
-	  					payload ["options[internal_title]"] = options;
-	  				}
-	  				if (blockBy != null && blockBy != ""){
-	  					payload ["blockby"] = blockBy;
-	  				}
-	  				
-	  				if (pollOptions != null && pollOptions != "" && pollOptions.charAt(0)=='[' && pollOptions.charAt(pollOptions.length-1)==']'){
-	  					pollOptions = eval("("+pollOptions+")");
-	  					var optionsParam = '';
-	  					for(var i=0; i < pollOptions.length; i++){
-								 
-								optionsParam += 'polloptions['+ i +']='+ pollOptions[i] + '&';
-						}
-						
-						if(optionsParam != ""){
-								optionsParam = optionsParam.substring(0, optionsParam.length-1);
-								payload ["polloptions"] = optionsParam;
-	  					}
-	  				}
-	  				if (pollType != null && pollType != ""){
-	  					payload ["polltype"] = pollType;
-	  				}
-	  				mc.setPayloadJSON(payload);
-					]]>
+                    var title = mc.getProperty("uri.var.title");
+                    var copy = mc.getProperty("uri.var.copy");
+                    var theme = mc.getProperty("uri.var.theme");
+                    var status = mc.getProperty("uri.var.status");
+                    var team = mc.getProperty("uri.var.team");
+                    var options = mc.getProperty("uri.var.options");
+                    var blockBy = mc.getProperty("uri.var.blockBy");
+                    var pollOptions = ''+mc.getProperty("uri.var.pollOptions");
+                    var pollType = mc.getProperty("uri.var.pollType");
+
+                    var	payload = {};
+
+                    if (title != null && title != ""){
+                        payload ["title"] = title;
+                    }
+                    if (copy != null && copy != ""){
+                        payload ["copy"] = copy;
+                    }
+
+                    if (status != null && status != ""){
+                        payload ["status"] = status;
+                    }
+                    if (theme != null && theme != ""){
+                        payload ["theme"] = theme;
+                    }
+                    if (team != null && team != ""){
+                        payload ["team"] = team;
+                    }
+                    if (options != null && options != ""){
+                        payload ["options[internal_title]"] = options;
+                    }
+                    if (blockBy != null && blockBy != ""){
+                        payload ["blockby"] = blockBy;
+                    }
+
+                    if (pollOptions != null && pollOptions != "" && pollOptions.charAt(0)=='[' && pollOptions.charAt(pollOptions.length-1)==']'){
+                        pollOptions = eval("("+pollOptions+")");
+                        var optionsParam = '';
+                        for(var i=0; i < pollOptions.length; i++){
+
+                                optionsParam += 'polloptions['+ i +']='+ pollOptions[i] + '&';
+                        }
+
+                        if(optionsParam != ""){
+                                optionsParam = optionsParam.substring(0, optionsParam.length-1);
+                                payload ["polloptions"] = optionsParam;
+                        }
+                    }
+                    if (pollType != null && pollType != ""){
+                        payload ["polltype"] = pollType;
+                    }
+                    mc.setPayloadJSON(payload);
+                    ]]>
         </script>
         <property name="messageType" value="application/x-www-form-urlencoded"
                   scope="axis2"/>

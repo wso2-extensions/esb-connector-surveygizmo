@@ -38,7 +38,7 @@
         <property name="uri.var.copy" expression="$func:copy"/>
         <script language="js">
             <![CDATA[
-            	var name = mc.getProperty('uri.var.name');
+                var name = mc.getProperty('uri.var.name');
                 var language = mc.getProperty('uri.var.language');
                 var status = mc.getProperty('uri.var.status');
                 var slug = mc.getProperty('uri.var.slug');
@@ -47,33 +47,33 @@
                 var copy = mc.getProperty('uri.var.copy');
                 var	payload={};
                 if (name != null && name != ""){
-                	payload.name = name;
+                    payload.name = name;
                 }
                 
                 if (language != null && language != ""){
-                	payload.language = language;
+                    payload.language = language;
                 }
 
                 if (status != null && status != ""){
-                	payload.status = status;
+                    payload.status = status;
                 }
                
                 if (slug != null && slug != ""){
-                	payload.slug = slug;
+                    payload.slug = slug;
                 }
                 
                 if (subType != null && subType != ""){
-                	payload.subtype = subType;
+                    payload.subtype = subType;
                 }
                 
                 if (tokenVariables != null && tokenVariables != ""){
-                	payload.tokenvariables = tokenVariables;
+                    payload.tokenvariables = tokenVariables;
                 }
                 
                 if (copy != null && copy.trim() != ""){
-                	payload.copy = copy;
+                    payload.copy = copy;
                 }
-               	mc.setPayloadJSON(payload);
+                mc.setPayloadJSON(payload);
           ]]>
         </script>
         <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2"/>
