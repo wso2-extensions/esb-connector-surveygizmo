@@ -26,9 +26,9 @@ Steps to follow in setting integration test.
  3. Prerequisites for SurveyGizmo Connector Integration Testing
 
 		i) Create a SurveyGizmo account using the URL "https://app.surveygizmo.com/login/v1".
-		    Note: Sign-up by clicking 'Try it out for free for 7 days!' when creating a new SurveyGizmo account.                              This account will be expired after the trial period of 7 days.
+		    Note: Sign-up by clicking 'Try it out for free for 7 days!' when creating a new SurveyGizmo account.This account will be expired after the trial period of 7 days.
 			
-		ii) Once it is completed create a new survey and click on the test tab in the menu bar.Create at least 10                       test responses by clicking 'Generate Test Responses'.
+		ii) Once it is completed create a new survey and click on the test tab in the menu bar.Create at least 10 test responses by clicking 'Generate Test Responses'.
 		
 		iii) Create one or more contact lists and add more than one contacts for each contact list.
 
