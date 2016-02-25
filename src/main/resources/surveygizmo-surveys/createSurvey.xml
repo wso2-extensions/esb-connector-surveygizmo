@@ -95,7 +95,6 @@
 								payload ["polloptions"] = optionsParam;
 	  					}
 	  					
-	  					
 	  				}
 	  				if (pollType != null && pollType != ""){
 	  					payload ["polltype"] = pollType;

@@ -51,8 +51,7 @@
                 if (urlQuery != "") {
                     
 					mc.setProperty('uri.var.urlQuery', urlQuery);    
-                }   
-                
+                }
             ]]>
         </script>
 
