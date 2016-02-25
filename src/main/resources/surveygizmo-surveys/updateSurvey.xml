@@ -85,13 +85,12 @@
                         pollOptions = eval("("+pollOptions+")");
                         var optionsParam = '';
                         for(var i=0; i < pollOptions.length; i++){
-
-                                optionsParam += 'polloptions['+ i +']='+ pollOptions[i] + '&';
+                            optionsParam += 'polloptions['+ i +']='+ pollOptions[i] + '&';
                         }
 
                         if(optionsParam != ""){
-                                optionsParam = optionsParam.substring(0, optionsParam.length-1);
-                                payload ["polloptions"] = optionsParam;
+                            optionsParam = optionsParam.substring(0, optionsParam.length-1);
+                            payload ["polloptions"] = optionsParam;
                         }
                     }
                     if (pollType != null && pollType != ""){
