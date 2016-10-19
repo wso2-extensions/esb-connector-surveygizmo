@@ -1,10 +1,11 @@
 {
   "apiUrl": "%s(apiUrl)",
-  "userName": "%s(userName)",
-  "password": "%s(password)",
+  "apiToken": "%s(apiToken)",
+  "apiVersion": "%s(apiVersion)",
   "surveyId": "%s(surveyId)",
   "type": "%s(campaignType)",
   "name": "%s(campaignName)",
   "language": "%s(campaignLanguage)",
-  "status": "%s(campaignStatus)"
+  "status": "%s(campaignStatus)",
+  "tokenVariables":"location=colorado"
 }

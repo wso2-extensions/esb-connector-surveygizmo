@@ -42,8 +42,9 @@
                 }
             </format>
             <args>
-                <arg expression="get-property('uri.var.type')"/>
-                <arg expression="get-property('uri.var.name')"/>
+                "$ctx:uri.var.type"
+                <arg expression="$ctx:uri.var.type"/>
+                <arg expression="$ctx:uri.var.name"/>
             </args>
         </payloadFactory>
         <script language="js">
@@ -53,42 +54,43 @@
                 var slug = mc.getProperty('uri.var.slug');
                 var subType = mc.getProperty('uri.var.subType');
                 var tokenVariables = mc.getProperty('uri.var.tokenVariables');
-                
                 payload = mc.getPayloadJSON();
-                
                 if (language != null && language!= ""){
                     payload.language = language;
                 }
-                
                 if (status != null && status!= ""){
                     payload.status = status;
                 }
-               
                 if (slug != null && slug!= ""){
                     payload.slug = slug;
                 }
-                
                 if (subType != null && subType != ""){
                     payload.subtype = subType;
                 }
-                
                 if (tokenVariables != null && tokenVariables != ""){
                     payload.tokenvariables = tokenVariables;
                 }
-               
                 mc.setPayloadJSON(payload);
-          ]]>
+            ]]>
         </script>
-        <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2"/>
-        <call>
-            <endpoint>
-                <http method="put"
-                      uri-template="{uri.var.apiUrl}/survey/{uri.var.surveyId}/surveycampaign{uri.var.authParam}"/>
-            </endpoint>
-        </call>
-        <!-- Remove custom Headers from the API Response -->
-        <header name="Vary" action="remove" scope="transport"/>
-        <header name="Via" action="remove" scope="transport"/>
-        <header name="X-Powered-By" action="remove" scope="transport"/>
+        <property name="messageType" value="application/json" scope="axis2"/>
+        <filter source="$ctx:surveygizmoBlocking" regex="true">
+            <then>
+                <call blocking="true">
+                    <endpoint>
+                        <http method="put"
+                              uri-template="{uri.var.apiUrl}/survey/{uri.var.surveyId}/surveycampaign{+uri.var.authParam}"/>
+                    </endpoint>
+                </call>
+            </then>
+            <else>
+                <call>
+                    <endpoint>
+                        <http method="put"
+                              uri-template="{uri.var.apiUrl}/survey/{uri.var.surveyId}/surveycampaign{+uri.var.authParam}"/>
+                    </endpoint>
+                </call>
+            </else>
+        </filter>
     </sequence>
 </template>

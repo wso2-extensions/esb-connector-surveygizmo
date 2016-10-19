@@ -1,5 +1,5 @@
 {
   "apiUrl": "%s(apiUrl)",
-  "userName": "%s(userName)",
-  "password": "%s(password)"
+  "apiToken": "%s(apiToken)",
+  "apiVersion": "%s(apiVersion)"
 }

@@ -29,31 +29,35 @@
                 var page = mc.getProperty('uri.var.page');
                 var resultsPerPage = mc.getProperty('uri.var.resultsPerPage');
                 var filters = mc.getProperty('uri.var.filters');
-                
                 var urlQuery = '';
-                
                 if (page != null && page != ""){
                     urlQuery += '&page=' + page ;
                 }
-                
                 if (resultsPerPage != null && resultsPerPage != ""){
                     urlQuery += '&resultsperpage=' + resultsPerPage ;
                 }
-               
                 if (urlQuery != "") {
                     mc.setProperty('uri.var.urlQuery', urlQuery);
                 }
             ]]>
         </script>
-        <call>
-            <endpoint>
-                <http method="get"
-                      uri-template="{uri.var.apiUrl}/survey/{uri.var.surveyId}/surveycampaign{uri.var.authParam}{uri.var.urlQuery}"/>
-            </endpoint>
-        </call>
-        <!-- Remove custom Headers from the API Response -->
-        <header name="Vary" action="remove" scope="transport"/>
-        <header name="Via" action="remove" scope="transport"/>
-        <header name="X-Powered-By" action="remove" scope="transport"/>
+        <filter source="$ctx:surveygizmoBlocking" regex="true">
+            <then>
+                <call blocking="true">
+                    <endpoint>
+                        <http method="get"
+                              uri-template="{uri.var.apiUrl}/survey/{uri.var.surveyId}/surveycampaign{+uri.var.authParam}{+uri.var.urlQuery}"/>
+                    </endpoint>
+                </call>
+            </then>
+            <else>
+                <call>
+                    <endpoint>
+                        <http method="get"
+                              uri-template="{uri.var.apiUrl}/survey/{uri.var.surveyId}/surveycampaign{+uri.var.authParam}{+uri.var.urlQuery}"/>
+                    </endpoint>
+                </call>
+            </else>
+        </filter>
     </sequence>
 </template>

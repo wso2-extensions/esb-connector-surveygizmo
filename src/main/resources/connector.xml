@@ -23,6 +23,6 @@
         <dependency component="surveygizmo-contacts"/>
         <dependency component="surveygizmo-surveyResponses"/>
         <dependency component="surveygizmo-surveys"/>
-        <description>surveygizmo connector library</description>
+        <description>WSO2 connector library for Surveygizmo</description>
     </component>
 </connector>

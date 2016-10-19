@@ -38,6 +38,7 @@
         <property name="uri.var.pollOptions" expression="$func:pollOptions"/>
         <property name="uri.var.pollType" expression="$func:pollType"/>
         <property name="uri.var.pollWidth" expression="$func:pollWidth"/>
+        <property name="uri.var.optionsURL" value=""/>
         <payloadFactory media-type="json">
             <format>
                 {
@@ -46,13 +47,12 @@
                 }
             </format>
             <args>
-                <arg expression="get-property('uri.var.title')"/>
-                <arg expression="get-property('uri.var.type')"/>
+                <arg expression="$ctx:uri.var.title"/>
+                <arg expression="$ctx:uri.var.type"/>
             </args>
         </payloadFactory>
         <script language="js">
             <![CDATA[
-
                     var status = mc.getProperty("uri.var.status");
                     var theme = mc.getProperty("uri.var.theme");
                     var team = mc.getProperty("uri.var.team");
@@ -61,9 +61,11 @@
                     var pollOptions = ''+mc.getProperty("uri.var.pollOptions");
                     var pollType = mc.getProperty("uri.var.pollType");
                     var pollWidth = mc.getProperty("uri.var.pollWidth");
-
+                    var query = '';
+                    if (options != null && options != ""){
+                        query = query.concat('options[internal_title]=' + options + '&');
+                    }
                     var payload = mc.getPayloadJSON();
-
                     if (status != null && status != ""){
                         payload ["status"] = status;
                     }
@@ -73,27 +75,8 @@
                     if (team != null && team != ""){
                         payload ["team"] = team;
                     }
-                    if (options != null && options != ""){
-                        payload ["options[internal_title]"] = options;
-                    }
                     if (blockBy != null && blockBy != ""){
                         payload ["blockby"] = blockBy;
-                    }
-
-                    if (pollOptions != null && pollOptions != "" && pollOptions.charAt(0)=='[' && pollOptions.charAt(pollOptions.length-1)==']'){
-
-                        pollOptions = eval("("+pollOptions+")");
-
-                        var optionsParam = '';
-                        for(var i=0; i < pollOptions.length; i++){
-                            optionsParam += 'polloptions['+ i +']='+ pollOptions[i] + '&';
-                        }
-
-                        if(optionsParam != ""){
-                            optionsParam = optionsParam.substring(0, optionsParam.length-1);
-                            payload ["polloptions"] = optionsParam;
-                        }
-
                     }
                     if (pollType != null && pollType != ""){
                         payload ["polltype"] = pollType;
@@ -101,19 +84,38 @@
                     if (pollWidth != null && pollWidth != ""){
                         payload ["pollwidth"] = pollWidth;
                     }
-
+                    if (pollOptions != null && pollOptions != ""){
+                        pollOptions = eval("("+pollOptions+")");
+                        var optionsParam = '';
+                        for(var i=0; i < pollOptions.length; i++){
+                            optionsParam += 'polloptions['+ i +']='+ pollOptions[i] + '&';
+                        }
+                        if(optionsParam != ""){
+                            query = query.concat(optionsParam);
+                        }
+                    }
+                    mc.setProperty('uri.var.optionsURL', query);
                     mc.setPayloadJSON(payload);
                     ]]>
         </script>
-        <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2"/>
-        <call>
-            <endpoint>
-                <http method="put" uri-template="{uri.var.apiUrl}/survey{uri.var.authParam}"/>
-            </endpoint>
-        </call>
-        <!-- Remove custom Headers from the API Response -->
-        <header name="Vary" action="remove" scope="transport"/>
-        <header name="Via" action="remove" scope="transport"/>
-        <header name="X-Powered-By" action="remove" scope="transport"/>
+        <property name="messageType" value="application/json" scope="axis2"/>
+        <filter source="$ctx:surveygizmoBlocking" regex="true">
+            <then>
+                <call blocking="true">
+                    <endpoint>
+                        <http method="put"
+                              uri-template="{uri.var.apiUrl}/survey/{+uri.var.authParam}{+uri.var.optionsURL}"/>
+                    </endpoint>
+                </call>
+            </then>
+            <else>
+                <call>
+                    <endpoint>
+                        <http method="put"
+                              uri-template="{uri.var.apiUrl}/survey/{+uri.var.authParam}{+uri.var.optionsURL}"/>
+                    </endpoint>
+                </call>
+            </else>
+        </filter>
     </sequence>
 </template>
