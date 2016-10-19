@@ -661,7 +661,7 @@ public class SurveygizmoConnectorIntegrationTest extends ConnectorIntegrationTes
         esbRequestHeadersMap.put("Action", "urn:listResponses");
         RestResponse<JSONObject> esbRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_listResponses_negative.json");
-        String apiEndPoint = connectorProperties.getProperty("apiUrl") + "/v4/survey/" + connectorProperties.getProperty("surveyIdToListResponse") + "/surveyresponse?" + authParam + "&page=invalid";
+        String apiEndPoint = connectorProperties.getProperty("apiUrl") + "/v5/survey/" + connectorProperties.getProperty("surveyIdToListResponse") + "/surveyresponse?" + authParam + "&page=invalid";
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
         Assert.assertEquals(apiRestResponse.getBody().getString("result_ok"),
                 esbRestResponse.getBody().getString("result_ok"));

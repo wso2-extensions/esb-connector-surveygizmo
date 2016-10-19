@@ -26,8 +26,6 @@
         <property name="uri.var.apiVersion" expression="$func:apiVersion"/>
         <property name="uri.var.apiToken" expression="$func:apiToken"/>
         <property name="surveygizmoBlocking" expression="$func:blocking"/>
-        //TODO avoid get property and use ctx
-
         <filter source="boolean($ctx:uri.var.apiUrl)" regex="true">
             <then>
                 <property name="uri.var.apiUrl" expression="fn:concat($ctx:uri.var.apiUrl,'/', $ctx:uri.var.apiVersion)"/>

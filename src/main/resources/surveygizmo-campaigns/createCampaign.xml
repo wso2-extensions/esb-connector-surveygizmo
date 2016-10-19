@@ -42,7 +42,6 @@
                 }
             </format>
             <args>
-                "$ctx:uri.var.type"
                 <arg expression="$ctx:uri.var.type"/>
                 <arg expression="$ctx:uri.var.name"/>
             </args>

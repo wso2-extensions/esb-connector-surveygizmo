@@ -11,7 +11,6 @@ Tested Platform:
  - UBUNTU 15.10
  - WSO2 ESB 5.0.0
 
-
 Steps to follow in setting integration test.
 
  1. Download ESB 5.0.0 from official website.
@@ -51,9 +50,9 @@ Steps to follow in setting integration test.
 	xvi)campaignStatus		-	Status of the campaign.
 	xvii)updatedCampaignLanguage	-	Status to set when updating the campaign.Use different value from xv)
 	xviii)surveyIdToListResponse	-	Place the survey Id from the created survey account in step 3[ii].
-	xix)surveyIdResponse		-	Place the survey Id from the created survey account in step 3[ii] with survey question.
-	xx)statusResponse       	-   Status of the Survey Response.
-	xxi)data                	-   Data for a selected question using ID, shortName.
+	xix)surveyIdResponse	-	Place the survey Id from the created survey account in step 3[ii] with survey question.
+	xx)statusResponse       -   Status of the Survey Response.
+	xxi)data                -   Data for a selected question using ID, shortName.
 
  5. Navigate to "{SURVEYGIZMO_HOME}/" and run the following command.
               $ mvn clean install
