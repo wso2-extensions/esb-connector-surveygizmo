@@ -20,7 +20,11 @@
     <subComponents>
         <component name="listResponses">
             <file>listResponses.xml</file>
-            <description>List all responses to to a survey.</description>
+            <description>List all responses to a survey.</description>
+        </component>
+        <component name="createResponse">
+            <file>createResponse.xml</file>
+            <description>Create response to a survey.</description>
         </component>
     </subComponents>
 </component>

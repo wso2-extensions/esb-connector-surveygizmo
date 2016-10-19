@@ -18,26 +18,23 @@
 -->
 <template name="init" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="apiUrl" description="The apiUrl URL of the SurveyGizmo API."/>
-    <parameter name="userName" description="User name of the SurveyGizmo account."/>
-    <parameter name="password" description="MD5 encoded Password of the SurveyGizmo account."/>
+    <parameter name="apiVersion" description="The api Version of the SurveyGizmo API."/>
+    <parameter name="apiToken" description="The api Token of the SurveyGizmo Account."/>
+    <parameter name="blocking" description="Set to true to perform the blocking invocations to Surveygizmo."/>
     <sequence>
         <property name="uri.var.apiUrl" expression="$func:apiUrl"/>
-        <property name="uri.var.userName" expression="$func:userName"/>
-        <property name="uri.var.password" expression="$func:password"/>
-        <filter source="boolean(get-property('uri.var.apiUrl'))" regex="true">
+        <property name="uri.var.apiVersion" expression="$func:apiVersion"/>
+        <property name="uri.var.apiToken" expression="$func:apiToken"/>
+        <property name="surveygizmoBlocking" expression="$func:blocking"/>
+        <filter source="boolean($ctx:uri.var.apiUrl)" regex="true">
             <then>
-                <property name="uri.var.apiUrl" expression="fn:concat(get-property('uri.var.apiUrl'), '/v4')"/>
+                <property name="uri.var.apiUrl" expression="fn:concat($ctx:uri.var.apiUrl,'/', $ctx:uri.var.apiVersion)"/>
             </then>
             <else>
-                <property name="uri.var.apiUrl" value="https://restapi.surveygizmo.com/v4"/>
+                <property name="uri.var.apiUrl" value="https://restapi.surveygizmo.com/v5"/>
             </else>
         </filter>
-        <!--Setting the Host Header: First remove the leading 'https://' -->
-        <property name="uri.var.host" expression="fn:substring-after(get-property('uri.var.apiUrl'),'https://')"/>
-        <!--Remove the trailing version No.-->
-        <property name="REQUEST_HOST_HEADER" expression="fn:substring-before(get-property('uri.var.host'), '/')"
-                  scope="axis2"/>
         <property name="uri.var.authParam"
-                  expression="fn:concat('?user:md5=',get-property('uri.var.userName'),':',get-property('uri.var.password'))"/>
+                  expression="fn:concat('?api_token=',$ctx:uri.var.apiToken,'&amp;')"/>
     </sequence>
 </template>

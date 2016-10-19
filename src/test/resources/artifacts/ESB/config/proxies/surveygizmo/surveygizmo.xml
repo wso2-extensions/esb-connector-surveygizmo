@@ -25,8 +25,8 @@
     <target>
         <inSequence>
             <property name="apiUrl" expression="json-eval($.apiUrl)"/>
-            <property name="userName" expression="json-eval($.userName)"/>
-            <property name="password" expression="json-eval($.password)"/>
+            <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+            <property expression="json-eval($.apiToken)" name="apiToken"/>
             <property name="page" expression="json-eval($.page)"/>
             <property name="resultsPerPage" expression="json-eval($.resultsPerPage)"/>
             <property name="filters" expression="json-eval($.filters)"/>
@@ -41,12 +41,23 @@
             <property name="name" expression="json-eval($.name)"/>
             <property name="language" expression="json-eval($.language)"/>
             <property name="contactListId" expression="json-eval($.contactListId)"/>
+            <property name="pollOptions" expression="json-eval($.pollOptions)"/>
+            <property name="pollType" expression="json-eval($.pollType)"/>
+            <property name="pollWidth" expression="json-eval($.pollWidth)"/>
+            <property  name="data" expression="json-eval($.data)"/>
             <surveygizmo.init>
                 <apiUrl>{$ctx:apiUrl}</apiUrl>
-                <userName>{$ctx:userName}</userName>
-                <password>{$ctx:password}</password>
+                <apiVersion>{$ctx:apiVersion}</apiVersion>
+                <apiToken>{$ctx:apiToken}</apiToken>
             </surveygizmo.init>
             <switch source="get-property('transport','Action')">
+                <case regex="urn:createResponse">
+                    <surveygizmo.createResponse>
+                        <status>{$ctx:status}</status>
+                        <surveyId>{$ctx:surveyId}</surveyId>
+                        <data>{$ctx:data}</data>
+                    </surveygizmo.createResponse>
+                </case>
                 <case regex="urn:listSurveys">
                     <surveygizmo.listSurveys>
                         <page>{$ctx:page}</page>
@@ -64,16 +75,28 @@
                     <surveygizmo.createSurvey>
                         <title>{$ctx:title}</title>
                         <type>{$ctx:type}</type>
+                        <team>{$ctx:team}</team>
+                        <blockBy>{$ctx:blockBy}</blockBy>
                         <theme>{$ctx:theme}</theme>
                         <status>{$ctx:status}</status>
                         <options>{$ctx:options}</options>
+                        <pollOptions>{$ctx:pollOptions}</pollOptions>
+                        <pollType>{$ctx:pollType}</pollType>
+                        <pollWidth>{$ctx:pollWidth}</pollWidth>
                     </surveygizmo.createSurvey>
                 </case>
                 <case regex="urn:updateSurvey">
                     <surveygizmo.updateSurvey>
-                        <options>{$ctx:options}</options>
+                        <title>{$ctx:title}</title>
+                        <type>{$ctx:type}</type>
                         <theme>{$ctx:theme}</theme>
+                        <copy>{$ctx:copy}</copy>
                         <status>{$ctx:status}</status>
+                        <blockBy>{$ctx:blockBy}</blockBy>
+                        <team>{$ctx:team}</team>
+                        <options>{$ctx:options}</options>
+                        <pollOptions>{$ctx:pollOptions}</pollOptions>
+                        <pollType>{$ctx:pollType}</pollType>
                         <surveyId>{$ctx:surveyId}</surveyId>
                     </surveygizmo.updateSurvey>
                 </case>
@@ -97,6 +120,9 @@
                         <name>{$ctx:name}</name>
                         <language>{$ctx:language}</language>
                         <status>{$ctx:status}</status>
+                        <slug>{$ctx:slug}</slug>
+                        <subType>{$ctx:subType}</subType>
+                        <tokenVariables>{$ctx:tokenVariables}</tokenVariables>
                     </surveygizmo.createCampaign>
                 </case>
                 <case regex="urn:updateCampaign">
@@ -106,6 +132,10 @@
                         <name>{$ctx:name}</name>
                         <language>{$ctx:language}</language>
                         <status>{$ctx:status}</status>
+                        <slug>{$ctx:slug}</slug>
+                        <subType>{$ctx:subType}</subType>
+                        <tokenVariables>{$ctx:tokenVariables}</tokenVariables>
+                        <copy>{$ctx:copy}</copy>
                     </surveygizmo.updateCampaign>
                 </case>
                 <case regex="urn:listContactLists">

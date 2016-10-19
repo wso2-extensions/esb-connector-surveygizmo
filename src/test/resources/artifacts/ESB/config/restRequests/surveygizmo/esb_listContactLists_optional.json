@@ -1,7 +1,7 @@
 {
   "apiUrl": "%s(apiUrl)",
-  "userName": "%s(userName)",
-  "password": "%s(password)",
+  "apiToken": "%s(apiToken)",
+  "apiVersion": "%s(apiVersion)",
   "page": "1",
   "resultsPerPage": "2"
 }

@@ -49,44 +49,46 @@
                 if (name != null && name != ""){
                     payload.name = name;
                 }
-                
                 if (language != null && language != ""){
                     payload.language = language;
                 }
-
                 if (status != null && status != ""){
                     payload.status = status;
                 }
-               
                 if (slug != null && slug != ""){
                     payload.slug = slug;
                 }
-                
                 if (subType != null && subType != ""){
                     payload.subtype = subType;
                 }
-                
                 if (tokenVariables != null && tokenVariables != ""){
                     payload.tokenvariables = tokenVariables;
                 }
-                
                 if (copy != null && copy.trim() != ""){
                     payload.copy = copy;
                 }
                 mc.setPayloadJSON(payload);
-          ]]>
+            ]]>
         </script>
-        <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2"/>
+        <property name="messageType" value="application/json" scope="axis2"/>
         <property name="FORCE_POST_PUT_NOBODY" value="true" scope="axis2" type="BOOLEAN"/>
-        <call>
-            <endpoint>
-                <http method="post"
-                      uri-template="{uri.var.apiUrl}/survey/{uri.var.surveyId}/surveycampaign/{uri.var.campaignId}{uri.var.authParam}"/>
-            </endpoint>
-        </call>
-        <!-- Remove custom Headers from the API Response -->
-        <header name="Vary" action="remove" scope="transport"/>
-        <header name="Via" action="remove" scope="transport"/>
-        <header name="X-Powered-By" action="remove" scope="transport"/>
+        <filter source="$ctx:surveygizmoBlocking" regex="true">
+            <then>
+                <call blocking="true">
+                    <endpoint>
+                        <http method="post"
+                              uri-template="{uri.var.apiUrl}/survey/{uri.var.surveyId}/surveycampaign/{uri.var.campaignId}{+uri.var.authParam}"/>
+                    </endpoint>
+                </call>
+            </then>
+            <else>
+                <call>
+                    <endpoint>
+                        <http method="post"
+                              uri-template="{uri.var.apiUrl}/survey/{uri.var.surveyId}/surveycampaign/{uri.var.campaignId}{+uri.var.authParam}"/>
+                    </endpoint>
+                </call>
+            </else>
+        </filter>
     </sequence>
 </template>
