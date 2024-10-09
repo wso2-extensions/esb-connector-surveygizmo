@@ -4,7 +4,7 @@
     "category": "Sales and Marketing",
     "documentationUrl": "https://docs.wso2.com/display/ESBCONNECTORS/SurveyGizmo+Connector",
     "description": "The SurveyGizmo connector allows you to access the SurveyGizmo REST API through the WSO2 ESB. SurveyGizmo allows you to create and send surveys online.",
-    "status": "Active",
+    "status": "Inactive",
     "labels": [
         "connector"
     ],
@@ -12,7 +12,7 @@
         {
             "tagName": "v2.0.0",
             "products": [
-                "\"ESB 5.0.0\""
+                "ESB 5.0.0"
             ],
             "isHidden": false
         }
